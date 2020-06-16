@@ -1,0 +1,24 @@
+
+<link href="{{ url_for('static', filename='css/icons/material-icons.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" >
+
+
+
+
+   
+<div class="sidebar">
+  <a class="active" href="#home"><i class="material-icons">home</i></a>
+  <a href="#news"><i class="material-icons">access_time</i></a>
+  <a href="#contact"><i class="material-icons">history</i></a>
+
+</div>
+
+<div class="content">
+  <div class="form">
+    <form action="/" method="POST">
+        <input type="text" name="form-content" id="form-content">
+        <input type="submit" value="Add Task">
+    </form>
+</div>
+</div>
+ 
