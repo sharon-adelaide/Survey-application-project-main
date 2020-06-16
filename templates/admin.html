@@ -2,10 +2,9 @@
 <link href="{{ url_for('static', filename='css/icons/material-icons.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" >
 
+{% extends "bootstrap/base.html" %}
 
-
-
-   
+{% block content %}
 <div class="sidebar">
   <a class="active" href="#home"><i class="material-icons">home</i></a>
   <a href="#news"><i class="material-icons">access_time</i></a>
@@ -14,11 +13,92 @@
 </div>
 
 <div class="content">
-  <div class="form">
-    <form action="/" method="POST">
-        <input type="text" name="form-content" id="form-content">
-        <input type="submit" value="Add Task">
-    </form>
+   <div class="grid-container">
+  <div class="item1">
+    <div class="row">
+            
+        <div class="col-md-4 col-sm-4 col-xs-6">
+             <div class="alert alert-info back-widget-set text-center">
+                <i style="font-size: 65px;"class="material-icons">people</i>
+                   <h3><b>500</b> <i class="fa fa-dollar"></i></h3>
+                  <span style="font-size: 13px;">Surbodinates</span>
+               </div>
+           </div>
+           <div class="col-md-4 col-sm-4 col-xs-6">
+            <div class="alert alert-info back-widget-set text-center">
+               <i style="font-size: 65px;"class="material-icons">timelapse</i>
+                  <h3><b>500</b> <i class="fa fa-dollar"></i></h3>
+                 <span style="font-size: 13px;">Pending Surveys</span>
+              </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-6">
+            <div class="alert alert-info back-widget-set text-center">
+               <i style="font-size: 65px;"class="material-icons">assignment_turned_in</i>
+                  <h3><b>500</b> <i class="fa fa-dollar"></i></h3>
+                 <span style="font-size: 13px;">Completed Surveys</span>
+              </div>
+          </div>
+      
+
+</div> 
+  </div>
+  
+  <div class="item2">
+
+
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12 ">
+        <div class="alert alert-info back-widget-set text-center row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+           <i style="font-size: 65px;"class="material-icons">person_add</i>
+              <br>
+           <button type="button" class="btn btn-success">Add Surbodinate</button>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <i style="font-size: 65px;"class="material-icons">group_add</i>
+                   <br>
+                <button type="button" class="btn btn-success">Bulk Surbodinates</button>
+                 </div>
+          </div>
+      </div>
+
+
+
+
+    
+  </div>
+  <div class="item3">
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="alert alert-info back-widget-set text-center">
+           <i style="font-size: 65px;"class="material-icons">create</i>
+              
+              <br>
+              <button type="button" class="btn btn-success">Create Survey</button>
+             <br>
+          </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="alert alert-info back-widget-set text-center">
+           <i style="font-size: 65px;"class="material-icons">list_alt</i>
+              
+              <br>
+              <button type="button" class="btn btn-success">Survey History</button>
+             <br>
+          </div>
+      </div>
+
+    </div>
+  </div>  
+   
+  
+   
 </div>
-</div>
+  </div>
+{% endblock %}
+
+
  

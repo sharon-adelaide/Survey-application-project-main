@@ -31,7 +31,7 @@ body {
   }
   
   div.content {
-    margin-left: 200px;
+    margin-left: 100px;
     padding: 1px 16px;
     height: 1000px;
   }
@@ -52,3 +52,33 @@ body {
       float: none;
     }
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    
+    padding: 10px;
+  }
+  
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+  
+  .item1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  .item2 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+
+  .item3 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  
