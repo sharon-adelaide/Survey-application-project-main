@@ -1,19 +1,190 @@
 
 <link href="{{ url_for('static', filename='css/icons/material-icons.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" >
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pureknob.js') }}"></script>
 {% extends "bootstrap/base.html" %}
 
 {% block content %}
 <div class="sidebar">
-  <a class="active" href="#home"><i class="material-icons">home</i></a>
-  <a href="#news"><i class="material-icons">access_time</i></a>
-  <a href="#contact"><i class="material-icons">history</i></a>
+  <a class="active" id="dashboard_options" style="text-decoration: none;" ><i class="material-icons">home</i></a>
+  <a id="survey_options" style="text-decoration: none;"><i class="material-icons">list_alt</i></a>
+  <a id="user_options" style="text-decoration: none;" ><i class="material-icons">group</i></a>
 
 </div>
 
 <div class="content">
-   <div class="grid-container">
+
+
+    <div id="user_section" style="display:none;padding-top:30vh;">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 ">
+        <div class="alert alert-info back-widget-set text-center row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+           <i style="font-size: 65px;"class="material-icons">person_add</i>
+              <br>
+           <button id="one_user"type="button" class="btn btn-success">Add Surbodinate</button>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <i style="font-size: 65px;"class="material-icons">group_add</i>
+                   <br>
+                <button type="button" class="btn btn-success">Bulk Surbodinates</button>
+                 </div>
+          </div>
+      </div>
+</div>
+
+<div class="row" id="add_single_user" style="display:none;">
+
+    <div class="col-md-12 col-sm-12 col-xs-12 ">
+        <div class="alert alert-info back-widget-set text-center row">
+            <div class="container">
+               
+                <br>
+                <!-- Nav tabs -->
+                <ul id="add_user"class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Personal Details</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Employment Details</a>
+                  </li>
+                  
+                </ul>
+              
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div id="home" class="container tab-pane active"><br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">First Name</button>
+                        </div>
+                        <input id="first_name"type="text" class="form-control" placeholder="Some text">
+                      </div>
+
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Last Name</button>
+                        </div>
+                        <input id="last_name"type="text" class="form-control" placeholder="Some text">
+                      </div>
+
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Email</button>
+                        </div>
+                        <input id="email"type="text" class="form-control" placeholder="Some text">
+                      </div>
+
+
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Phone Number</button>
+                        </div>
+                        <input id="phone_number"type="text" class="form-control" placeholder="Some text">
+                      </div>
+
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Gender</button>
+                        </div>
+                       
+  <select class="form-control" id="gender">
+    <option>Male</option>
+    <option>Female</option>
+   
+  </select>
+                      </div>
+
+                      <div class="justify-content-right float-right" ><button id="pd_next"type="button" class="btn">Next</button></div>
+                             
+                    </div>
+
+
+                  
+
+
+
+
+
+                  <div id="menu1" class="container tab-pane fade"><br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Divsion</button>
+                        </div>
+                       
+  <select class="form-control" id="division">
+    <option>Finance</option>
+    <option>Consulting</option>
+    <option>Technology</option>
+   
+  </select>
+                      </div>
+
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-primary" type="button">Job Title</button>
+                        </div>
+                        <input id="job_title"type="text" class="form-control" placeholder="Some text">
+                      </div>
+
+                      <div class="btn-group float-right">
+                        
+                        <button type="button" class="btn" id="ed_back">Previous</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                      </div>
+                  </div>
+
+
+
+
+                  
+                </div>
+              </div>
+            
+          </div>
+      </div>
+    
+</div>
+        
+    </div>
+
+    <div id="survey_section" style="display:none;padding-top:30vh;">
+
+        <div class="row" >
+            
+            <br>
+            <br>
+            <br>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="alert alert-info back-widget-set text-center">
+                   <i style="font-size: 65px;"class="material-icons">create</i>
+                      
+                      <br>
+                      <button type="button" class="btn btn-success">Create Survey</button>
+                     <br>
+                  </div>
+              </div>
+        
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="alert alert-info back-widget-set text-center">
+                   <i style="font-size: 65px;"class="material-icons">history</i>
+                      
+                      <br>
+                      <button type="button" class="btn btn-success">Survey History</button>
+                     <br>
+                  </div>
+              </div>
+        
+            </div>
+    </div>
+   <div id="dashboard_section" class="grid-container">
   <div class="item1">
     <div class="row">
             
@@ -46,23 +217,47 @@
   <div class="item2">
 
 
+    <div class="row">
 
 
-    <div class="col-md-12 col-sm-12 col-xs-12 ">
-        <div class="alert alert-info back-widget-set text-center row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-           <i style="font-size: 65px;"class="material-icons">person_add</i>
-              <br>
-           <button type="button" class="btn btn-success">Add Surbodinate</button>
+        
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                   Survey Progress
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4">	<img class="img-fluid" src="https://miro.medium.com/max/1198/1*DIq4u0PzaPtayrRnpFr0BA.png" style="max-width: 100%; height: auto; "/><br><p style="font-size: 12px;">Salary Analysis</p></div>
+                        <div class="col-sm-4"><img class="img-fluid" src="https://miro.medium.com/max/1198/1*DIq4u0PzaPtayrRnpFr0BA.png" style="max-width: 100%; height: auto; "/><br><p style="font-size: 12px;">Customer Analysis</p></div>
+                        <div class="col-sm-4"><img class="img-fluid" src="https://miro.medium.com/max/1198/1*DIq4u0PzaPtayrRnpFr0BA.png" style="max-width: 100%; height: auto; "/><br><p style="font-size: 12px;">Procastination Overload</p></div>
+                        <div class="col-sm-4"><img class="img-fluid" src="https://miro.medium.com/max/1198/1*DIq4u0PzaPtayrRnpFr0BA.png" style="max-width: 100%; height: auto; "/><br><p style="font-size: 12px;">Tinz Analysis</p></div>
+                      </div>
+                </div>
             </div>
+            
+            
+        
+        
+        </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <i style="font-size: 65px;"class="material-icons">group_add</i>
-                   <br>
-                <button type="button" class="btn btn-success">Bulk Surbodinates</button>
-                 </div>
-          </div>
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                   Survey History
+                </div>
+                <div class="panel-body">
+            <div class="col-sm-12">
+                <img class="img-fluid" src=" https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/5c3316c0-cacd-4f54-9e97-c2904781f9c7/simple-line-chart.png" style="max-width: 100%; height: auto; "/>
+               
+            </div>
+            </div>
+            </div>
+        </div>
+     
       </div>
+   
+   
 
 
 
@@ -70,34 +265,64 @@
     
   </div>
   <div class="item3">
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="alert alert-info back-widget-set text-center">
-           <i style="font-size: 65px;"class="material-icons">create</i>
-              
-              <br>
-              <button type="button" class="btn btn-success">Create Survey</button>
-             <br>
-          </div>
-      </div>
 
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="alert alert-info back-widget-set text-center">
-           <i style="font-size: 65px;"class="material-icons">list_alt</i>
-              
-              <br>
-              <button type="button" class="btn btn-success">Survey History</button>
-             <br>
-          </div>
-      </div>
-
-    </div>
   </div>  
    
   
    
 </div>
+
+
+
   </div>
+
+  <script>
+    
+  $("#one_user").click(function(){
+document.getElementById('user_section').style.paddingTop = '3vh';
+document.getElementById('add_single_user').style.display = 'block';
+
+});
+</script>
+  <script>
+      
+    $("#dashboard_options").click(function(){
+document.getElementById('survey_section').style.display = 'none';
+document.getElementById('user_section').style.display = 'none';
+document.getElementById('dashboard_section').style.display = 'block';
+});
+</script>
+
+  <script>
+      $("#survey_options").click(function(){
+  document.getElementById('survey_section').style.display = 'block';
+  document.getElementById('user_section').style.display = 'none';
+  document.getElementById('dashboard_section').style.display = 'none';
+});
+  </script>
+
+<script>
+    $("#user_options").click(function(){
+        document.getElementById('user_section').style.paddingTop = '30vh';
+document.getElementById('add_single_user').style.display = 'none';
+document.getElementById('survey_section').style.display = 'none';
+document.getElementById('dashboard_section').style.display = 'none';
+document.getElementById('user_section').style.display = 'block';
+});
+</script>
+<script>
+    $(function(){
+    $('#pd_next').click(function(e){
+    	e.preventDefault();
+        $('#add_user a[href="#menu1"]').tab('show');
+    }),
+    $('#ed_back').click(function(e){
+	    e.preventDefault();
+        $('#add_user a[href="#home"]').tab('show');
+    })  
+})
+</script>
+
 {% endblock %}
 
 
