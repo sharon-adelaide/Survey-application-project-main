@@ -1,12 +1,77 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///survey_app.db'
 db = SQLAlchemy(app)
+
+class Manager(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(200), nullable=False)
+    lastname = db.Column(db.String(200), nullable=False)
+  
+   
+    date_created  = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Manager %r>' % self.id
+
+
+class Subordinate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(200), nullable=False)
+    lastname = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
+
+    job_title= db.Column(db.String(200), nullable=False)
+   
+    date_created  = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Subordinate %r>' % self.id
+
+
+
+
+
+class Survey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+   
+    survey_id = db.Column(db.String(200), nullable=False)
+  
+    subordinate_id = db.Column(db.String(200), nullable=False)
+
+    question = db.Column(db.String(200), nullable=False)
+    question_type = db.Column(db.String(200), nullable=False)
+    options = db.Column(db.String(200), nullable=False)
+    
+   
+    date_created  = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Survey %r>' % self.id
+
+
+class Responses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+  
+    survey_id = db.Column(db.String(200), nullable=False)
+   
+   
+    subordinate_id = db.Column(db.String(200), nullable=False)
+    question = db.Column(db.String(200), nullable=False)
+    question_type = db.Column(db.String(200), nullable=False)
+    response = db.Column(db.String(200), nullable=False)
+    
+   
+    date_created  = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Responses %r>' % self.id
+
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,9 +80,34 @@ class Todo(db.Model):
 
     def __repr__(self):
         return '<Task %r>' % self.id
-@app.route('/admin')
+
+
+        
+@app.route('/admin', methods=['POST','GET'])
 def admin():
-    return render_template('admin.html')
+    if request.method == 'POST':
+        fn = request.form['first_name']
+        ln = request.form['last_name']
+        email = request.form['email']
+        job_title = request.form['job_title']
+        new_user = Subordinate(firstname=fn,lastname=ln,email=email,job_title=job_title)
+
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/admin')
+
+        except:
+            'There was an issue adding your user'
+    
+        
+    else:
+        subs = Subordinate.query.order_by(Subordinate.date_created).all()
+        subs_count = Subordinate.query.filter(Subordinate.id != "").count()
+
+        return render_template('admin.html', subs=subs , subs_count= subs_count)
+        
+      
 
 @app.route('/', methods=['POST','GET'])
 def index():

@@ -14,13 +14,13 @@
 </div>
 
 <div class="content">
-
+   
 
     <div id="user_section" style="display:none;padding-top:30vh;">
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 ">
         <div class="alert alert-info back-widget-set text-center row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-6 ccol-sm-6 col-xs-6">
            <i style="font-size: 65px;"class="material-icons">person_add</i>
               <br>
            <button id="one_user"type="button" class="btn btn-success">Add Surbodinate</button>
@@ -56,11 +56,12 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div id="home" class="container tab-pane active"><br>
+                    <form  action="/admin" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary" type="button">First Name</button>
                         </div>
-                        <input id="first_name"type="text" class="form-control" placeholder="Some text">
+                        <input id="first_name" name="first_name"type="text" class="form-control" placeholder="Some text">
                       </div>
 
 
@@ -68,7 +69,7 @@
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary" type="button">Last Name</button>
                         </div>
-                        <input id="last_name"type="text" class="form-control" placeholder="Some text">
+                        <input id="last_name" name="last_name"type="text" class="form-control" placeholder="Some text">
                       </div>
 
 
@@ -76,30 +77,12 @@
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary" type="button">Email</button>
                         </div>
-                        <input id="email"type="text" class="form-control" placeholder="Some text">
+                        <input id="email"type="text" name="email"class="form-control" placeholder="Some text">
                       </div>
 
 
 
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary" type="button">Phone Number</button>
-                        </div>
-                        <input id="phone_number"type="text" class="form-control" placeholder="Some text">
-                      </div>
-
-
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary" type="button">Gender</button>
-                        </div>
-                       
-  <select class="form-control" id="gender">
-    <option>Male</option>
-    <option>Female</option>
-   
-  </select>
-                      </div>
+                      
 
                       <div class="justify-content-right float-right" ><button id="pd_next"type="button" class="btn">Next</button></div>
                              
@@ -113,32 +96,22 @@
 
 
                   <div id="menu1" class="container tab-pane fade"><br>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary" type="button">Divsion</button>
-                        </div>
-                       
-  <select class="form-control" id="division">
-    <option>Finance</option>
-    <option>Consulting</option>
-    <option>Technology</option>
-   
-  </select>
-                      </div>
+                    
 
 
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary" type="button">Job Title</button>
                         </div>
-                        <input id="job_title"type="text" class="form-control" placeholder="Some text">
+                        <input id="job_title"type="text" name="job_title"class="form-control" placeholder="Some text">
                       </div>
 
                       <div class="btn-group float-right">
                         
                         <button type="button" class="btn" id="ed_back">Previous</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
+                    </form>
                   </div>
 
 
@@ -183,6 +156,44 @@
               </div>
         
             </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="alert alert-info back-widget-set text-center row">
+                        
+                        
+            
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row text-center">
+                                Questions
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4 col-xs-4 ">
+                                    <div class="alert alert-info back-widget-set text-center row">
+                                        <div class="col-sm-4">
+
+                                            <span class="material-icons" id="add_question">
+                                                add_circle_outline
+                                                </span>
+                                        </div>
+    
+                                      
+                                        </div>
+                                        </div>
+                            </div>
+                           
+                               
+                                    
+                                
+                           
+                            <div id="questions">
+                            
+                              </div>
+                             </div>
+                      </div>
+                  </div>
+            </div>
     </div>
    <div id="dashboard_section" class="grid-container">
   <div class="item1">
@@ -191,7 +202,8 @@
         <div class="col-md-4 col-sm-4 col-xs-6">
              <div class="alert alert-info back-widget-set text-center">
                 <i style="font-size: 65px;"class="material-icons">people</i>
-                   <h3><b>500</b> <i class="fa fa-dollar"></i></h3>
+                   <h3><b>{{subs_count}}
+                </b> <i class="fa fa-dollar"></i></h3>
                   <span style="font-size: 13px;">Surbodinates</span>
                </div>
            </div>
@@ -322,7 +334,54 @@ document.getElementById('user_section').style.display = 'block';
     })  
 })
 </script>
+<script>
+    $("#add_question").click(function(){
+        console.log($('.question_list').length+1);
+        var question_count = $('.question_list').length+1;
+        $("#questions").append('<div id="question_'+question_count+'"><div class="question_list input-group mt-3 mb-3"><input type="text" class="form-control" placeholder="Username"><div class="input-group-prepend"><button type="button" class="btn btn-outline-secondary dropdown-toggle justify-content-center" data-toggle="dropdown"><span id="qt_'+question_count+'">Question Type</span></button><div class="dropdown-menu"><span id="t_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Text</span><span id="mc_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Multiple Choice</span></div></div><button id="button_'+question_count+'" type="button" onclick="remove_question(this.id)" class="btn btn-danger">x</button></div></div>');
+});
+</script>
+<script>
+    function remove_question(id){
+        
+        var divv = id.substr(7)
+        $("#question_"+divv).remove();
+    }
+</script>
 
+<script>
+    function question_type(id){
+        var before_character = id.split('_')[0];
+        var after_character=id.split('_')[1];
+      
+        if(before_character == 't'){
+            var mc_count = $('.mc'+after_character).length+1;
+           
+            if(mc_count > 0){
+                $('#question_' + after_character+' .option_count').remove();
+            }
+            $("#qt_"+after_character).html('Text'); 
+        }
+        else{
+            var mc_count = $('.question_list').length+1;
+            if(mc_count > 0){
+
+            }
+            $("#qt_"+after_character).html('Multiple Choice'); 
+            $("#question_"+after_character).append('<div class="container mc'+after_character+' option_count"><div class="row"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Option</span></div><input type="text" class="form-control" placeholder="Username"><span class="material-icons" id="add_option_'+(parseInt(after_character))+'" onclick="add_option(this.id)">add_circle_outline</span></div></div></div>')
+            
+        }
+    }
+</script>
+
+<script>
+    function add_option(id){
+        var after_special_character=id.split('_')[2];
+        var option_count = $('#question_' + after_special_character+' .option_count').length+1;
+   
+        $("#question_"+after_special_character).append('<div class="container option_count mc'+after_special_character+'_'+option_count+'"><div class="row"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Option</span></div><input type="text" class="form-control" placeholder="Username"></div><span class="material-icons" id="add_option_'+(parseInt(after_special_character))+'" onclick="add_option(this.id)">add_circle_outline</span></div></div>')
+    }
+</script>
 {% endblock %}
 
 
