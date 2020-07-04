@@ -165,6 +165,7 @@
             
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="row text-center">
+                                
                                 Questions
                             </div>
 
@@ -189,6 +190,14 @@
                            
                             <div id="questions">
                             
+
+                                
+                              </div>
+                              <div>
+                                <button  type="button" class="btn btn-success" onclick="survey_submit()">Submit</button>  
+                                <div id="sur_view">
+                                    dd
+                                </div>
                               </div>
                              </div>
                       </div>
@@ -338,7 +347,7 @@ document.getElementById('user_section').style.display = 'block';
     $("#add_question").click(function(){
         console.log($('.question_list').length+1);
         var question_count = $('.question_list').length+1;
-        $("#questions").append('<div id="question_'+question_count+'"><div class="question_list input-group mt-3 mb-3"><input type="text" class="form-control" placeholder="Username"><div class="input-group-prepend"><button type="button" class="btn btn-outline-secondary dropdown-toggle justify-content-center" data-toggle="dropdown"><span id="qt_'+question_count+'">Question Type</span></button><div class="dropdown-menu"><span id="t_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Text</span><span id="mc_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Multiple Choice</span></div></div><button id="button_'+question_count+'" type="button" onclick="remove_question(this.id)" class="btn btn-danger">x</button></div></div>');
+        $("#questions").append('<div class="survey_question" id="question_'+question_count+'"><div class="question_list input-group mt-3 mb-3"><input id="input_'+question_count+'"type="text" class="form-control " placeholder="Enter question..."><div class="input-group-prepend"><button type="button" class="btn btn-outline-secondary dropdown-toggle justify-content-center" data-toggle="dropdown"><span id="qt_'+question_count+'">Question Type</span></button><div class="dropdown-menu"><span id="t_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Text</span><span id="mc_'+question_count+'" onclick="question_type(this.id)" class="dropdown-item text-center justify-content-center" >Multiple Choice</span></div></div><button id="button_'+question_count+'" type="button" onclick="remove_question(this.id)" class="btn btn-danger">x</button></div></div>');
 });
 </script>
 <script>
@@ -368,7 +377,7 @@ document.getElementById('user_section').style.display = 'block';
 
             }
             $("#qt_"+after_character).html('Multiple Choice'); 
-            $("#question_"+after_character).append('<div class="container mc'+after_character+' option_count"><div class="row"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Option</span></div><input type="text" class="form-control" placeholder="Username"><span class="material-icons" id="add_option_'+(parseInt(after_character))+'" onclick="add_option(this.id)">add_circle_outline</span></div></div></div>')
+            $("#question_"+after_character).append('<div class="container mc'+after_character+' option_count"><div class="row"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Option</span></div><input type="text" class="form-control option_'+after_character+'" placeholder="Username"><span class="material-icons" id="add_option_'+(parseInt(after_character))+'" onclick="add_option(this.id)">add_circle_outline</span></div></div></div>')
             
         }
     }
@@ -380,6 +389,46 @@ document.getElementById('user_section').style.display = 'block';
         var option_count = $('#question_' + after_special_character+' .option_count').length+1;
    
         $("#question_"+after_special_character).append('<div class="container option_count mc'+after_special_character+'_'+option_count+'"><div class="row"><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text">Option</span></div><input type="text" class="form-control" placeholder="Username"></div><span class="material-icons" id="add_option_'+(parseInt(after_special_character))+'" onclick="add_option(this.id)">add_circle_outline</span></div></div>')
+    }
+</script>
+
+<script>
+    function survey_submit(){
+        var movies = {
+    'title': 'movie_title',
+    'release_date': 'movie_release_date'
+    }
+
+        var survey = []
+        var number_of_questions = $('.survey_question').length;
+        for(i=0;i<number_of_questions;i++){
+            var question_type = document.getElementById('qt_'+(i+1)).innerHTML;
+            
+            if(question_type == 'Text'){
+                var question = (document.getElementById('input_'+(i+1)).value)
+                survey.push([question_type,question])
+            }
+            else{
+                var options = []
+                var question = (document.getElementById('input_'+(i+1)).value)
+                $('#question_'+(i+1)).find('input:text').each(function() {
+    options.push($(this).val());
+    
+});
+options.shift();
+survey.push([question_type,question,options])
+            }
+
+        }
+        $.get(
+    url="/testt",
+    data={host: [1,2,3]},
+    success = function (data) {
+        alert('page content: ' + data);
+    }
+)
+       
+
     }
 </script>
 {% endblock %}

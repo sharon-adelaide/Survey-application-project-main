@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_bootstrap import Bootstrap
+import sys
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -81,6 +82,13 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.id
 
+
+
+@app.route('/testt')
+def example():
+    print(request.args)
+	
+	
 
         
 @app.route('/admin', methods=['POST','GET'])
